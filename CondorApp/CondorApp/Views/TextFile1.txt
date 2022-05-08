@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CondorApp.Views.HomePage"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             Title="{Binding Title}"
+             Visual="Material">
+
+    <ContentPage.Resources>
+        <Style TargetType="Button" Class="BotonHomeIzquierdo">
+            <Setter Property="FontFamily" Value="Popins" />
+            <Setter Property="ContentLayout" Value="Top,0" />
+            <Setter Property="HorizontalOptions" Value="Start" />
+            <Setter Property="BackgroundColor" Value="#1F2424" />
+            <Setter Property="TextColor" Value="#FFFFFFE5" />
+            <Setter Property="CornerRadius" Value="12" />
+            <Setter Property="WidthRequest" Value="120" />
+            <Setter Property="HeightRequest" Value="120" />
+            <Setter Property="xct:ShadowEffect.Color" Value="#0E1010" />
+            <Setter Property="xct:ShadowEffect.OffsetX" Value="1" />
+            <Setter Property="xct:ShadowEffect.OffsetY" Value="-3" />
+            <Setter Property="xct:ShadowEffect.Radius" Value="5" />
+            <Setter Property="xct:ShadowEffect.Opacity" Value="1" />
+            <Setter Property="Margin" Value="0,30,25,0" />
+        </Style>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <Label 
+                FontSize="40"
+                FontFamily="Popins"
+                Text="Realizar"
+                FontAttributes="Bold"
+                HorizontalOptions="Center" Margin="0,30,0,0"></Label>
+            <--
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                <Button Text="Cobro"
+                    ImageSource="IconCobroHome.png" ></Button>
+
+                <Button Text="Venta"
+                    FontFamily="Popins"
+                    ContentLayout="Top,0"
+                    ImageSource="IconCobroHome.png" 
+                    HorizontalOptions="Start"
+                    BackgroundColor="#1F2424"
+                    TextColor="#FFFFFFE5"
+                    CornerRadius="12"
+                    WidthRequest="120" 
+                    HeightRequest="120"
+                    xct:ShadowEffect.Color="#0E1010"
+                    xct:ShadowEffect.OffsetX="1"
+                    xct:ShadowEffect.OffsetY="-3"
+                    xct:ShadowEffect.Radius="5"
+                    xct:ShadowEffect.Opacity="1"
+                    Margin="25,30,0,0"></Button>
+            </StackLayout>
+
+        </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>

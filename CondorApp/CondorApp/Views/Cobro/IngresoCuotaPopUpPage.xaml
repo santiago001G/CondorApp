@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage  
+    xmlns:pages="http://rotorgames.com"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+    x:Class="CondorApp.Views.Cobro.IngresoCuotaPopUpPage"
+    CloseWhenBackgroundIsClicked="False">
+    
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation 
+            PositionIn="Center"
+            PositionOut="Center"
+            ScaleIn="1.2"
+            ScaleOut="0.8"
+            DurationIn="400"
+            DurationOut="300"
+            EasingIn="SinOut"
+            EasingOut="SinIn"
+            HasBackgroundAnimation="True"/>
+    </pages:PopupPage.Animation>
+    <StackLayout 
+        HorizontalOptions="Center"
+        VerticalOptions="Center"
+        Margin="25,0,25,0"
+        Padding="0,0,0,0">
+        <Frame Style="{StaticResource PopUp_Frame}"
+               WidthRequest="300"
+               Padding="0,20,0,20">
+            <StackLayout 
+                HorizontalOptions="Center">
+                <Label
+                    Text="Valor Cuota"
+                    Style="{StaticResource Title2_Poppins}"
+                    HorizontalTextAlignment="Center"></Label>
+                <Label
+                    IsVisible="{Binding EsCuotaProducto}"
+                    Text="{Binding NombreProducto}"
+                    Style="{StaticResource Body2_Poppins}"
+                    HorizontalTextAlignment="Center"></Label>
+                <Frame
+                    WidthRequest="180"
+                    Margin="0,20,0,0"
+                    Style="{StaticResource Base_FrameEntry}">
+                    <Entry Style="{StaticResource Base_Entry}"
+                           Text="{Binding Cuota}"
+                           Keyboard="Numeric">
+                    </Entry>
+                </Frame>
+                <Grid
+                    Margin="0,20,0,0"
+                    ColumnDefinitions="auto,auto"
+                    RowDefinitions="auto">
+                    <Button 
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Margin="0,0,15,0"
+                        Padding="10,0,10,0"
+                        WidthRequest="110"
+                        BorderColor="Transparent"
+                        Style="{StaticResource Secondary_Button}"
+                        Text="Cancelar"
+                        Clicked="Button_Clicked_1">
+                    </Button>
+                    <Button
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Margin="15,0,0,0"
+                        Padding="10,0,10,0"
+                        WidthRequest="110"
+                        BorderColor="Transparent"
+                        Style="{StaticResource Base_Button}"
+                        Text="Registar"
+                        Clicked="Button_Clicked">
+                    </Button>
+                </Grid>
+            </StackLayout>
+        </Frame>
+    </StackLayout>
+</pages:PopupPage>

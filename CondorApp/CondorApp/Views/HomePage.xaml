@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CondorApp.Views.HomePage"
+             Title="{Binding Title}">
+
+    <ContentPage.Resources>
+        <Style x:Key="BotonHomeIzquierdo" TargetType="Button"
+                   BasedOn="{StaticResource Home_Button}">
+            <Setter Property="Margin" Value="0,30,25,0" />
+        </Style>
+        <Style x:Key="BotonHomeDerecho" TargetType="Button"
+                   BasedOn="{StaticResource Home_Button}">
+            <Setter Property="Margin" Value="25,30,0,0" />
+        </Style>
+
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <Label 
+                Text="Realizar"
+                Style="{StaticResource Title1_Poppins}" 
+                HorizontalOptions="Center" 
+                Margin="0,30,0,0"></Label>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                <Button 
+                    Text="Cobro"
+                    ImageSource="IconCobroHome.png"
+                    Command="{Binding CobroCommand}"
+                    Style="{StaticResource BotonHomeIzquierdo}"></Button>
+
+                <Button Text="Venta" 
+                        ImageSource="IconVentaHome.png" 
+                        Command="{Binding VentaCommand}"
+                        Style="{StaticResource Home_Button,BotonHomeDerecho}">
+                </Button>
+            </StackLayout>
+            <Label 
+                Text="Ver Resumen de"
+                Style="{StaticResource Title1_Poppins}" 
+                HorizontalOptions="Center" Margin="0,30,0,0"></Label>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                <Button 
+                    Text="Cobros"
+                    ImageSource="IconResumenCobroHome.png"
+                    Style="{StaticResource BotonHomeIzquierdo}">
+                </Button>
+
+                <Button Text="Ventas" ImageSource="IconResumenVentasHome.png" 
+                        Style="{StaticResource BotonHomeDerecho}"></Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

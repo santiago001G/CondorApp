@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CondorApp.Styles.Colors">
+
+    <Color x:Key="PrimaryColor">#111414</Color>
+    <Color x:Key="SecundaryColor">#00C1B6</Color>
+    <Color x:Key="FailColor">#FE6A6A</Color>
+    <Color x:Key="SuccessColor">#2CDABA</Color>
+    <Color x:Key="SecondaryButtonColor">#727272</Color>
+
+    <!--App Theme Light-->
+    <Color x:Key="LightPrimaryTextColor">#14D3B9</Color>
+    <Color x:Key="LightSecondaryTextColor">#444856</Color>
+    <Color x:Key="LightThirdTextColor">#7A979E</Color>
+    <Color x:Key="LightPlaceholderTextColor">#DBDBDB</Color>
+
+    <Color x:Key="LightButtonColor">#14D3B9</Color>
+    <Color x:Key="LightButtonTextColor">#FFFFFF</Color>
+    <Color x:Key="LighDangerButtonColor">#ED8283</Color>
+    <Color x:Key="LightDangerButtonTextColor">#FFFFFF</Color>
+    <Color x:Key="LightSecondaryButtonColor">#D5E4E8</Color>
+
+    <Color x:Key="LightButtonHomeColor">#FFFFFF</Color>
+    <Color x:Key="LightButtonHomeTextColor">#444856</Color>
+
+    <Color x:Key="LightEntryBackgroundColor">#FFFFFF</Color>
+    <Color x:Key="LightSecondaryEntryBackgroundColor">#D5E4E8</Color>
+    <Color x:Key="LightEntryBorderColor">#D2D2D2</Color>
+
+    <Color x:Key="LightPopUpBackgroundColor">#495050</Color>
+   
+    <Color x:Key="LightCardBackgroundColor">#FFFFFF</Color>
+    <Color x:Key="LightCardBorderColor">#E1E1E1</Color>
+    <Color x:Key="LightCardUnselectedBackgroundColor">#FFFFFF</Color>
+
+    <Color x:Key="LightPageBackgroundColor">#F8FCFD</Color>
+
+    <Color x:Key="LightTransparentBackgroundColor">#55F0F0F0</Color>
+
+    <!--App Theme Dark-->
+
+    <Color x:Key="DarkPrimaryTextColor">#E9E9E9</Color>
+    <Color x:Key="DarkSecondaryTextColor">#B1B2B2</Color>
+    <Color x:Key="DarkThirdTextColor">#B1B2B2</Color>
+    <Color x:Key="DarkPlaceholderTextColor">#B1B2B2</Color>
+
+    <Color x:Key="DarkButtonColor">#00C1B6</Color>
+    <Color x:Key="DarkButtonTextColor">#E9E9E9</Color>
+    <Color x:Key="DarkDangerButtonColor">#582E2E</Color>
+    <Color x:Key="DarkDangerButtonTextColor">#FFFFFF</Color>
+    <Color x:Key="DarkSecondaryButtonColor">#727272</Color>
+
+    <Color x:Key="DarkButtonHomeColor">#1F2424</Color>
+    <Color x:Key="DarkButtonHomeTextColor">#E9E9E9</Color>
+
+    <Color x:Key="DarkEntryBackgroundColor">#1F2424</Color>
+    <Color x:Key="DarkEntryBorderColor">#424242</Color>
+
+    <Color x:Key="DarkPopUpBackgroundColor">#272B2B</Color>
+
+    <Color x:Key="DarkCardBackgroundColor">#1F2424</Color>
+    <Color x:Key="DarkCardBorderColor">#424242</Color>
+    <Color x:Key="DarkCardUnselectedBackgroundColor">#1F2424</Color>
+
+    <Color x:Key="DarkPageBackgroundColor">#111414</Color>
+
+    <Color x:Key="DarkTransparentBackgroundColor">#55212121</Color>
+
+    <!--Detalle Cobro Modulo Ligth-->
+    <Color x:Key="LightIndicatorPaidBackgroundColor">#BBF2E9</Color>
+    <Color x:Key="LightIndicatorToPayBackgroundColor">#F5CECF</Color>
+    <!--Detalle Cobro Modulo Dark-->
+    <Color x:Key="DarkIndicatorPaidBackgroundColor">#194F46</Color>
+    <Color x:Key="DarkIndicatorToPayBackgroundColor">#582E2E</Color>
+
+</ResourceDictionary>

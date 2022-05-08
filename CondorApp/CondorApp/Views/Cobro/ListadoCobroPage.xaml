@@ -1,0 +1,315 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:CondorApp.ViewModels"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:model="clr-namespace:CondorApp.Models"  
+             xmlns:converters="clr-namespace:CondorApp.Converters"
+             x:Class="CondorApp.Views.Cobro.ListadoCobroPage"
+             x:Name="NombrePagina">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ClienteUbicacionConverter x:Key="clienteConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout
+            Grid.Row="5"
+            Padding="10,20,10,0">
+            <Grid 
+                ColumnDefinitions="7*,3*"
+                RowDefinitions="auto">
+                <Frame
+                    Margin="0,0,0,0"
+                    Style="{StaticResource Base_FrameEntry}">
+                    <Entry 
+                        x:Name="nombreBusqueda"
+                        Placeholder="Nombre del cliente"
+                        Style="{StaticResource Base_Entry}">
+                        <Entry.Effects>
+                            <xct:RemoveBorderEffect></xct:RemoveBorderEffect>
+                        </Entry.Effects>
+                    </Entry>
+                </Frame>
+                <Button
+                    Grid.Column="1"
+                    Style="{StaticResource Base_Button}"
+                    Text="Buscar"
+                    Padding="0,3,0,0"
+                    Margin="0,0,5,0"
+                    Command="{Binding BuscarClienteCommand}"
+                    CommandParameter="{Binding Source={x:Reference nombreBusqueda}, Path=Text}">
+                </Button>
+            </Grid>
+            <Grid
+                ColumnDefinitions="*,*"
+                ColumnSpacing="0"
+                RowDefinitions="auto"
+                Margin="0,25,0,20">
+                <Frame
+                    Grid.Column="0"
+                    Margin="0,0,2,0"
+                    CornerRadius="15"
+                    xct:TouchEffect.NativeAnimation="True"
+                    Padding="0,8,0,8">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding CambiarTipoListaCommand}"
+                            CommandParameter="pendientes">
+                        </TapGestureRecognizer>
+                    </Frame.GestureRecognizers>
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroup>
+                            <VisualState x:Name="selected">
+                                <VisualState.StateTriggers>
+                                    <StateTrigger IsActive="{Binding TipoListado, Converter={xct:EqualConverter}, ConverterParameter='pendientes'}"></StateTrigger>
+                                </VisualState.StateTriggers>
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightButtonColor}, Dark={StaticResource DarkButtonColor}}"/>
+                                    <Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource LightCardBackgroundColor}, Dark={StaticResource DarkCardBackgroundColor}}"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="notSelected">
+                                <VisualState.StateTriggers>
+                                    <StateTrigger IsActive="{Binding TipoListado, Converter={xct:EqualConverter}, ConverterParameter='cobrados'}"></StateTrigger>
+                                </VisualState.StateTriggers>
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightCardUnselectedBackgroundColor}, Dark={StaticResource DarkCardUnselectedBackgroundColor}}"/>
+                                    <Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource LightCardBorderColor}, Dark={StaticResource DarkCardBorderColor}}"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateManager.VisualStateGroups>
+                    <Label
+                        Text="Pendientes"
+                        FontSize="{StaticResource SubTitle1FontSize}"
+                        HorizontalTextAlignment="Center"
+                        VerticalTextAlignment="Center">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup>
+                                <VisualState x:Name="selected">
+                                    <VisualState.StateTriggers>
+                                        <StateTrigger IsActive="{Binding TipoListado, Converter={xct:EqualConverter}, ConverterParameter='pendientes'}"></StateTrigger>
+                                    </VisualState.StateTriggers>
+                                    <VisualState.Setters>
+                                        <Setter Property="FontFamily" Value="Poppins-SemiBold"/>
+                                        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource LightButtonTextColor}, Dark={StaticResource DarkButtonTextColor}}"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="notSelected">
+                                    <VisualState.StateTriggers>
+                                        <StateTrigger IsActive="{Binding TipoListado, Converter={xct:EqualConverter}, ConverterParameter='cobrados'}"></StateTrigger>
+                                    </VisualState.StateTriggers>
+                                    <VisualState.Setters>
+                                        <Setter Property="FontFamily" Value="Poppins-Regular"/>
+                                        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource LightSecondaryTextColor}, Dark={StaticResource DarkSecondaryTextColor}}"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Label>
+                </Frame>
+                <Frame
+                    Grid.Column="1"
+                    Margin="2,0,0,0"
+                    CornerRadius="15"
+                    xct:TouchEffect.NativeAnimation="True"
+                    Padding="0,8,0,8">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding CambiarTipoListaCommand}"
+                            CommandParameter="cobrados">
+                        </TapGestureRecognizer>
+                    </Frame.GestureRecognizers>
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroup>
+                            <VisualState x:Name="selected">
+                                <VisualState.StateTriggers>
+                                    <StateTrigger IsActive="{Binding TipoListado, Converter={xct:EqualConverter}, ConverterParameter='cobrados'}"></StateTrigger>
+                                </VisualState.StateTriggers>
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightButtonColor}, Dark={StaticResource DarkButtonColor}}"/>
+                                    <Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource LightCardBackgroundColor}, Dark={StaticResource DarkCardBackgroundColor}}"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="notSelected">
+                                <VisualState.StateTriggers>
+                                    <StateTrigger IsActive="{Binding TipoListado, Converter={xct:EqualConverter}, ConverterParameter='pendientes'}"></StateTrigger>
+                                </VisualState.StateTriggers>
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightCardUnselectedBackgroundColor}, Dark={StaticResource DarkCardUnselectedBackgroundColor}}"/>
+                                    <Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource LightCardBorderColor}, Dark={StaticResource DarkCardBorderColor}}"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateManager.VisualStateGroups>
+                    <Label
+                        Text="Cobrados"
+                        FontSize="{StaticResource SubTitle1FontSize}"
+                        HorizontalTextAlignment="Center"
+                        FontFamily="Poppins-SemiBold"
+                        VerticalTextAlignment="Center">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup>
+                                <VisualState x:Name="selected">
+                                    <VisualState.StateTriggers>
+                                        <StateTrigger IsActive="{Binding TipoListado, Converter={xct:EqualConverter}, ConverterParameter='cobrados'}"></StateTrigger>
+                                    </VisualState.StateTriggers>
+                                    <VisualState.Setters>
+                                        <Setter Property="FontFamily" Value="Poppins-SemiBold"/>
+                                        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource LightButtonTextColor}, Dark={StaticResource DarkButtonTextColor}}"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="notSelected">
+                                    <VisualState.StateTriggers>
+                                        <StateTrigger IsActive="{Binding TipoListado, Converter={xct:EqualConverter}, ConverterParameter='pendientes'}"></StateTrigger>
+                                    </VisualState.StateTriggers>
+                                    <VisualState.Setters>
+                                        <Setter Property="FontFamily" Value="Poppins-Regular"/>
+                                        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource LightSecondaryTextColor}, Dark={StaticResource DarkSecondaryTextColor}}"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Label>
+                </Frame>
+            </Grid>
+            <CollectionView
+                x:Name="ClienteItems"
+                ItemsSource="{Binding Clientes}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout x:DataType="model:Cliente">
+                            <xct:Expander Margin="0,0,0,30">
+                                <xct:Expander.Header>
+                                    <Frame
+                                        Padding="13"
+                                        Margin="10,0"
+                                        CornerRadius="12"
+                                        xct:TouchEffect.NativeAnimation="True">
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup>
+                                                <VisualState x:Name="normal">
+                                                    <VisualState.StateTriggers>
+                                                        <StateTrigger IsActive="True"></StateTrigger>
+                                                    </VisualState.StateTriggers>
+                                                    <VisualState.Setters>
+                                                        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightCardBackgroundColor}, Dark={StaticResource DarkCardBackgroundColor}}"/>
+                                                        <Setter Property="HasShadow" Value="True"/>
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+                                        <Grid
+                                            ColumnDefinitions="1*, 7.5*,1.5*"
+                                            RowDefinitions="Auto, Auto"
+                                            RowSpacing="0">
+                                            <Label
+                                                Grid.Row="0"
+                                                Grid.Column="0"
+                                                Grid.ColumnSpan="1"
+                                                Grid.RowSpan="2"
+                                                Text="&#xf111;"
+                                                FontSize="30"
+                                                FontFamily="FontAwesome_Solid"
+                                                VerticalOptions="Center"
+                                                HorizontalOptions="Center">
+                                                <VisualStateManager.VisualStateGroups>
+                                                    <VisualStateGroup>
+                                                        <VisualState x:Name="porCobrar">
+                                                            <VisualState.StateTriggers>
+                                                                <StateTrigger IsActive="{Binding PagadoHoy ,Converter={xct:InvertedBoolConverter}}"></StateTrigger>
+                                                            </VisualState.StateTriggers>
+                                                            <VisualState.Setters>
+                                                                <Setter Property="TextColor" Value="{StaticResource FailColor}"/>
+                                                            </VisualState.Setters>
+                                                        </VisualState>
+                                                        <VisualState x:Name="yaCobrado">
+                                                            <VisualState.StateTriggers>
+                                                                <StateTrigger IsActive="{Binding PagadoHoy}"></StateTrigger>
+                                                            </VisualState.StateTriggers>
+                                                            <VisualState.Setters>
+                                                                <Setter Property="TextColor" Value="{StaticResource SuccessColor}"/>
+                                                            </VisualState.Setters>
+                                                        </VisualState>
+                                                    </VisualStateGroup>
+                                                </VisualStateManager.VisualStateGroups>
+                                            </Label>
+                                            <Label
+                                                Grid.Row="0"
+                                                Grid.Column="1"
+                                                Style="{StaticResource Body1_Poppins}"
+                                                Text="{Binding Nombre}">
+                                            </Label>
+                                            <Label
+                                                Grid.Row="1"
+                                                Grid.Column="1"
+                                                Style="{StaticResource Body3_Poppins}"
+                                                Text="{Binding EstadoPagos}">
+                                            </Label>
+                                            <Label
+                                                Grid.Column="2"
+                                                Grid.ColumnSpan="1"
+                                                Grid.RowSpan="2"
+                                                VerticalOptions="CenterAndExpand"
+                                                Style="{StaticResource Body1_Poppins}"
+                                                Text="{Binding ValorCuota, StringFormat='${0}'}">
+                                            </Label>
+                                        </Grid>
+                                    </Frame>
+                                </xct:Expander.Header>
+                                <Frame  
+                                    Padding="13"
+                                    Margin="10,0"
+                                    xct:CornerRadiusEffect.CornerRadius="0,0,0,0"
+                                    BackgroundColor="Transparent">
+                                    <Grid
+                                        ColumnDefinitions="auto, auto, auto, auto"
+                                        RowDefinitions="auto"
+                                        ColumnSpacing="20"
+                                        HorizontalOptions="CenterAndExpand">
+                                        <Button
+                                            Grid.Column="0"
+                                            Grid.Row="0"
+                                            Text="&#xf129;"
+                                            Style="{StaticResource Button_Card}"
+                                            Command="{Binding BindingContext.AbrirInfoClienteCommand, Source={x:Reference NombrePagina}}"
+                                            CommandParameter="{Binding Id}">
+                                        </Button>
+                                        <Button
+                                            Grid.Column="1"
+                                            Grid.Row="0"
+                                            Text="&#xf041;"
+                                            Style="{StaticResource Button_Card}"
+                                            Command="{Binding BindingContext.AbrirUbicacionClienteCommand, Source={x:Reference NombrePagina}}"
+                                            CommandParameter="{Binding Ubicacion}">
+                                        </Button>
+                                        <Button
+                                            Grid.Column="2"
+                                            Grid.Row="0"
+                                            Text="&#xf155;"
+                                            Style="{StaticResource Button_Card}"
+                                            Command="{Binding BindingContext.AbrirDetalleCobroCommand, Source={x:Reference NombrePagina}}"
+                                            CommandParameter="{Binding Id}">
+                                        </Button>
+                                        <Button   
+                                            Grid.Column="3"
+                                            Grid.Row="0"
+                                            Text="&#xf095;"
+                                            Style="{StaticResource Button_Card}"
+                                            Command="{Binding BindingContext.LlamarClienteCommand, Source={x:Reference NombrePagina}}"
+                                            CommandParameter="{Binding Telefono}">
+                                        </Button>
+                                    </Grid>
+                                </Frame>
+                            </xct:Expander>
+
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

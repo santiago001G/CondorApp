@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CondorApp.Styles.Fonts">
+
+    <OnPlatform
+      x:Key="Title0FontSize"
+      x:TypeArguments="x:Double"
+      Android="28"
+      iOS="28" />
+    <OnPlatform
+      x:Key="Title1FontSize"
+      x:TypeArguments="x:Double"
+      Android="28"
+      iOS="28" />
+    <OnPlatform
+      x:Key="Title2FontSize"
+      x:TypeArguments="x:Double"
+      Android="20"
+      iOS="20" />
+    <OnPlatform
+      x:Key="SubTitle1FontSize"
+      x:TypeArguments="x:Double"
+      Android="16"
+      iOS="16" />
+    <OnPlatform
+      x:Key="SubTitle2FontSize"
+      x:TypeArguments="x:Double"
+      Android="14"
+      iOS="14" />
+    <OnPlatform
+      x:Key="Body1FontSize"
+      x:TypeArguments="x:Double"
+      Android="18"
+      iOS="18" />
+    <OnPlatform
+      x:Key="Body2FontSize"
+      x:TypeArguments="x:Double"
+      Android="14"
+      iOS="14" />
+    <OnPlatform
+      x:Key="Body3FontSize"
+      x:TypeArguments="x:Double"
+      Android="12"
+      iOS="12" />
+    <OnPlatform
+      x:Key="ButtonFontSize"
+      x:TypeArguments="x:Double"
+      Android="16"
+      iOS="16" />
+</ResourceDictionary>

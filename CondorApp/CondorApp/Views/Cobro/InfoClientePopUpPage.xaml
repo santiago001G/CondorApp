@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage  
+             xmlns:pages="http://rotorgames.com" 
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CondorApp.Views.Cobro.InfoClientePopUpPage"
+             xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+             CloseWhenBackgroundIsClicked="True">
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation 
+            PositionIn="Center"
+            PositionOut="Center"
+            ScaleIn="1.2"
+            ScaleOut="0.8"
+            DurationIn="400"
+            DurationOut="300"
+            EasingIn="SinOut"
+            EasingOut="SinIn"
+            HasBackgroundAnimation="True"/>
+    </pages:PopupPage.Animation>
+    <StackLayout 
+        HorizontalOptions="Center"
+        VerticalOptions="Center"
+        Margin="25,0,25,0">
+        <Frame Style="{StaticResource PopUp_Frame}"
+               HorizontalOptions="CenterAndExpand">
+            <StackLayout HorizontalOptions="CenterAndExpand">
+                <Label
+                    Text="{Binding Nombre}"
+                    Style="{StaticResource Title1_Poppins}"
+                    HorizontalTextAlignment="Center"></Label>
+                <Grid 
+                    ColumnDefinitions="auto"
+                    RowDefinitions="auto,auto,auto,auto">
+                    <Label
+                        Grid.Column="0"
+                        Grid.Row="0"
+                        Text="{Binding Telefono, StringFormat='Teléfono: {0}'}"
+                        Style="{StaticResource Body2_Poppins}">
+                    </Label>
+                    <Label
+                        Grid.Column="0"
+                        Grid.Row="1"
+                        Text="{Binding PeridicidadCobro, StringFormat='Periodicidad Pago: {0}'}"
+                        Style="{StaticResource Body2_Poppins}">
+                    </Label>
+                    <Label
+                        Grid.Column="0"
+                        Grid.Row="2"
+                        Text="{Binding Direccion, StringFormat='Dirección: {0}'}"
+                        Style="{StaticResource Body2_Poppins}">
+                    </Label>
+                    <Label
+                        Grid.Column="0"
+                        Grid.Row="3"
+                        Text="{Binding Descripcion, StringFormat='Descripción: {0}'}"
+                        Style="{StaticResource Body2_Poppins}">
+                    </Label>
+                </Grid>
+            </StackLayout>
+        </Frame>
+    </StackLayout>
+</pages:PopupPage>

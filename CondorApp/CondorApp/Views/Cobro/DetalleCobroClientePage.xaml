@@ -1,0 +1,302 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:model="clr-namespace:CondorApp.Models"
+             x:Class="CondorApp.Views.Cobro.DetalleCobroClientePage"
+             x:Name="DetalleCobro">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Editar Cliente"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout 
+            Padding="15,20,15,0">
+            <Grid
+                ColumnDefinitions="8*,3*"
+                RowDefinitions="auto, auto">
+                <Label
+                    Grid.Column="0"
+                    Grid.Row="0"
+                    Text="{Binding Cliente.Nombre}"
+                    Style="{StaticResource Title0_Poppins}"
+                    HorizontalTextAlignment="Start">
+                </Label>
+                <Frame 
+                    x:Name="EstadoCobroCliente"
+                    Grid.Column="1"
+                    Grid.Row="0"
+                    Padding="0,8,0,8"
+                    Style="{StaticResource Estado_Cobro_Frame}"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center">
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroup>
+                            <VisualState x:Name="porCobrar">
+                                <VisualState.StateTriggers>
+                                    <StateTrigger IsActive="{Binding EsPagadoHoy,Mode=TwoWay,Converter={xct:InvertedBoolConverter}}"></StateTrigger>
+                                </VisualState.StateTriggers>
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightIndicatorToPayBackgroundColor}, Dark={StaticResource DarkIndicatorToPayBackgroundColor}}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="yaCobrado">
+                                <VisualState.StateTriggers>
+                                    <StateTrigger IsActive="{Binding EsPagadoHoy,Mode=TwoWay}"></StateTrigger>
+                                </VisualState.StateTriggers>
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightIndicatorPaidBackgroundColor}, Dark={StaticResource DarkIndicatorPaidBackgroundColor}}"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateManager.VisualStateGroups>
+                    <Label
+                        Style="{StaticResource SubTitle1FontSize}"
+                        FontSize="18"
+                        Opacity="0.9"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup>
+                                <VisualState x:Name="porCobrar">
+                                    <VisualState.StateTriggers>
+                                        <StateTrigger IsActive="{Binding EsPagadoHoy, Converter={xct:InvertedBoolConverter}}"></StateTrigger>
+                                    </VisualState.StateTriggers>
+                                    <VisualState.Setters>
+                                        <Setter Property="TextColor" Value="#FF6969"/>
+                                        <Setter Property="Text" Value="Pendiente"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="yaCobrado">
+                                    <VisualState.StateTriggers>
+                                        <StateTrigger IsActive="{Binding EsPagadoHoy}"></StateTrigger>
+                                    </VisualState.StateTriggers>
+                                    <VisualState.Setters>
+                                        <Setter Property="TextColor" Value="#4EC6B2"/>
+                                        <Setter Property="Text" Value="Cobrado"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Label>
+                </Frame>
+                <Label
+                    Grid.Column="0"
+                    Grid.Row="1"
+                    Text="{Binding Cliente.PeridicidadCobro, StringFormat='Cliente {0}'}"
+                    Style="{StaticResource SubTitle1_Poppins}"
+                    HorizontalTextAlignment="Start">
+                </Label>
+            </Grid>
+            <Grid
+                IsVisible="{Binding EsPagadoHoy}"
+                ColumnDefinitions="5*, 5*"
+                RowDefinitions="auto, auto, auto, auto"
+                Margin="0,25,0,0">
+                <Label
+                    Grid.Column="0"
+                    Grid.Row="0"
+                    Text="Pagado Hoy"
+                    Style="{StaticResource Body2_Poppins}">
+                </Label>
+                <Frame
+                    Grid.Column="0"
+                    Grid.Row="1"
+                    Style="{StaticResource Informative_FrameEntry}"
+                    BorderColor="Transparent"
+                    HeightRequest="50">
+                    <Label
+                        HorizontalTextAlignment="Start"
+                        VerticalTextAlignment="Center"
+                        Text="{Binding ValorPagadoHoy ,StringFormat='$ {0}'}"
+                        FontSize="{StaticResource Title2FontSize}"
+                        TextColor="{AppThemeBinding Light={StaticResource LightButtonTextColor}, Dark={StaticResource DarkButtonTextColor}}">
+                    </Label>
+                </Frame>
+                <Label
+                    Grid.Column="1"
+                    Grid.Row="0"
+                    Text="Articulos"
+                    Style="{StaticResource Body2_Poppins}">
+                </Label>
+                <Frame
+                    Grid.Column="1"
+                    Grid.Row="1"
+                    Style="{StaticResource Informative_FrameEntry}"
+                    HeightRequest="50"
+                    BorderColor="Transparent">
+                    <Label
+                        HorizontalTextAlignment="Start"
+                        VerticalTextAlignment="Center"
+                        Text="{Binding CantidadArticulos}"
+                        FontSize="{StaticResource Title2FontSize}"
+                        TextColor="{AppThemeBinding Light={StaticResource LightButtonTextColor}, Dark={StaticResource DarkButtonTextColor}}">
+                    </Label>
+                </Frame>
+                <Label
+                    Grid.Column="0"
+                    Grid.Row="2"
+                    Text="Deuda Total"
+                    Style="{StaticResource Body2_Poppins}">
+                </Label>
+                <Frame
+                    Grid.Column="0"
+                    Grid.Row="3"
+                    Style="{StaticResource Informative_FrameEntry}"
+                    HeightRequest="50"
+                    BorderColor="Transparent">
+                    <Label
+                        HorizontalTextAlignment="Start"
+                        VerticalTextAlignment="Center"
+                        Text="{Binding DeudaTotal,StringFormat='$ {0}'}"
+                        FontSize="{StaticResource Title2FontSize}"
+                        TextColor="{AppThemeBinding Light={StaticResource LightButtonTextColor}, Dark={StaticResource DarkButtonTextColor}}">
+                    </Label>
+                </Frame>
+            </Grid>
+            <Grid
+                IsVisible="{Binding EsPagadoHoy}"
+                ColumnDefinitions="auto, auto, auto"
+                RowDefinitions="auto"
+                HorizontalOptions="CenterAndExpand"
+                Margin="0,20,0,0">
+                <Button
+                    Grid.Column="0"
+                    Grid.Row="0"
+                    Style="{StaticResource Danger_Button}"
+                    VerticalOptions="CenterAndExpand"
+                    Text="Eliminar"
+                    Padding="20,3,20,0"
+                    Margin="0,0,5,0"
+                    Command="{Binding EliminarCuotaCommand}">
+                </Button>
+                <Button
+                    Grid.Column="1"
+                    Grid.Row="0"
+                    Style="{StaticResource Secondary_Button}"
+                    Text="Editar"
+                    Padding="20,3,20,0"
+                    Margin="0,0,5,0"
+                    Command="{Binding EditarCuotaCommand}">
+                </Button>
+                <Button
+                    Grid.Column="2"
+                    Grid.Row="0"
+                    Style="{StaticResource Secondary_Button}"
+                    Text="Finalizar"
+                    Padding="20,3,20,0"
+                    Margin="0,0,5,0"
+                    Command="{Binding FinalizarCobroCommand}">
+                </Button>
+            </Grid>
+            <Grid
+                IsVisible="{Binding EsPagadoHoy, Converter={xct:InvertedBoolConverter}}"
+                ColumnDefinitions="5*, 5*"
+                RowDefinitions="auto, auto"
+                Margin="0,25,0,0">
+                <Label
+                    Grid.Column="0"
+                    Grid.Row="0"
+                    Text="Cuota Completa"
+                    Padding="0,3,0,0"
+                    Style="{StaticResource Body2_Poppins}">
+                </Label>
+                <Frame
+                    Grid.Column="0"
+                    Grid.Row="1"
+                    Style="{StaticResource Informative_FrameEntry}"
+                    BorderColor="Transparent">
+                    <Label
+                        HorizontalTextAlignment="Start"
+                        VerticalTextAlignment="Center"
+                        Text="{Binding Cliente.ValorCuota ,StringFormat='${0}'}"
+                        FontSize="{StaticResource Title2FontSize}"
+                        TextColor="{AppThemeBinding Light={StaticResource LightSecondaryTextColor}, Dark={StaticResource DarkPrimaryTextColor}}">
+                    </Label>
+                </Frame>
+                <Button
+                    Grid.Column="1"
+                    Grid.Row="1"
+                    Style="{StaticResource Base_Button}"
+                    Text="Abonar a todos"
+                    Padding="0,3,0,0"
+                    Margin="0,0,5,0"
+                    Command="{Binding AbrirPopUpCuotaCommand}">
+                </Button>
+            </Grid>
+            <StackLayout IsVisible="{Binding EsPagadoHoy, Converter={xct:InvertedBoolConverter}}">
+                <Label
+                    Margin="0,25,0,0"
+                    Text="{Binding CantidadArticulos,StringFormat='Articulos: {0}'}"
+                    FontSize="{StaticResource SubTitle1FontSize}"
+                    TextColor="{AppThemeBinding Light={StaticResource LightButtonTextColor}, Dark={StaticResource DarkButtonTextColor}}">
+                </Label>
+                <CollectionView
+                    IsVisible="{Binding EsPagadoHoy, Converter={xct:InvertedBoolConverter}}"
+                    x:Name="ClienteItems"
+                    ItemsSource="{Binding ProductosCliente}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout x:DataType="model:ProductoCliente">
+                                <Frame
+                                    Padding="13"
+                                    Margin="5,10"
+                                    CornerRadius="12"
+                                    BackgroundColor="{AppThemeBinding Light={StaticResource LightCardBackgroundColor}, Dark={StaticResource DarkCardBackgroundColor}}"
+                                    HasShadow="True">
+                                    <Grid
+                                        ColumnDefinitions="8*,2*"
+                                        RowDefinitions="auto,auto,auto">
+                                        <Label
+                                            Grid.Column="0"
+                                            Grid.Row="0"
+                                            Text="Articulo"
+                                            Style="{StaticResource Body3_Poppins}"
+                                            HorizontalTextAlignment="Start">
+                                        </Label>
+                                        <Label
+                                            Grid.Column="0"
+                                            Grid.Row="1"
+                                            Text="{Binding NombreProducto}"
+                                            Style="{StaticResource Body1_Poppins}"
+                                            HorizontalTextAlignment="Start">
+                                        </Label>
+                                        <Grid
+                                            ColumnDefinitions="auto, auto"
+                                            RowDefinitions="auto"
+                                            Grid.Row="2"
+                                            Grid.ColumnSpan="2">
+                                            <Label
+                                                Grid.Row="0"
+                                                Grid.Column="0"
+                                                HorizontalOptions="StartAndExpand"
+                                                Style="{StaticResource SubTitle2_Poppins}"
+                                                TextColor="{StaticResource SecundaryColor}"
+                                                TextDecorations="Underline"
+                                                Text="Ver Historial">
+                                            </Label>
+                                            <Label
+                                                Grid.Row="0"
+                                                Grid.Column="1"
+                                                Margin="180,0,0,0"
+                                                HorizontalOptions="EndAndExpand"
+                                                Style="{StaticResource SubTitle2_Poppins}"
+                                                TextColor="{StaticResource SecundaryColor}"
+                                                TextDecorations="Underline"
+                                                Text="Abonar">
+                                                <Label.GestureRecognizers>
+                                                    <TapGestureRecognizer 
+                                                        Command="{Binding  BindingContext.AbrirPopUpCuotaProductoCommand, Source={Reference DetalleCobro}}"
+                                                        CommandParameter="{Binding IdMercaderia}"/>
+                                                </Label.GestureRecognizers>
+                                            </Label>
+                                        </Grid>
+                                    </Grid>
+                                </Frame>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
